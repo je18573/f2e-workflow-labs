@@ -31,3 +31,34 @@ Task1 Output
 My Default Task
 [15:08:09] Finished 'default' after 263 μs
  */
+ 
+ 
+ 
+ /* 
+ 把src目錄指定的資料，複製(pipe)一份到指定的路徑(desk) 
+ [Result]
+ js
+ 	-bootstrap.js
+ 	-bootstrp.min.js
+ 	-npm.js
+ */
+ gulp.task('output1', function(){
+	gulp.src('assets/bootstrap/**/*.js')
+		.pipe(gulp.dest('output1'));
+ });
+ 
+ /* 
+ 把src目錄指定的資料，複製(pipe)一份到指定的路徑(desk)，
+ 但是指定路徑所長出來的資料夾是根據base裡的設定，
+ 即以assets為基底，建立assets之後指定的資料夾&檔案。
+ [Result]
+ bootstrap
+ 	-js
+ 		-bootstrap.js
+ 		-bootstrp.min.js
+ 		-npm.js
+ */
+ gulp.task('output2', function(){
+	gulp.src('assets/bootstrap/**/*.js', { base:"assets" })
+		.pipe(gulp.dest('output2'));
+ });
