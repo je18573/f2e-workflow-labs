@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var del = require('del');
+
 gulp.task('default', ['mytask1'], function() {
 	console.log('My Default Task');
 });
@@ -73,4 +75,15 @@ My Default Task
 		.pipe(gulp.dest('output3'));	 
  });
  
- 
+ /*
+ 使用 del 模組刪除資料夾或檔案
+  */
+ gulp.task('clean', function(){
+	 
+	//這會把bootstrap資料夾也整個砍掉
+	//del(['output2/bootstrap/**']);
+	
+	//後面多加排除設定，可避免bootstrap資料夾被刪除
+	del(['output2/bootstrap/**', '!output2/bootstrap']);
+	
+ });
