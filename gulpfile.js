@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var del = require('del');
 var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
 
 gulp.task('default', ['mytask1'], function() {
 	console.log('My Default Task');
@@ -115,4 +116,18 @@ gulp.task('concat-app', function(){
 		.pipe(concat('app.bundles.js'))
 		.pipe(gulp.dest('assets'));
 });
- 
+
+gulp.task('uglify-app', function(){
+	gulp.src('app/**/*.module.js')
+		.pipe(gulp.dest('src/app'))
+		.pipe(concat('app.modules.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('assets'));
+	
+	gulp.src(['app/**/*.js','!app/**/*.module.js'])
+		.pipe(gulp.dest('src/app'))
+		.pipe(concat('app.bundles.js'))
+		.pipe(uglify( {mangle: false} ))		
+		.pipe(gulp.dest('assets'));
+			
+});
