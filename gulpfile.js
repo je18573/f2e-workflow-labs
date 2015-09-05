@@ -75,6 +75,7 @@ My Default Task
 		.pipe(gulp.dest('output3'));	 
  });
  
+ /*===========================================================*/
  /*
  使用 del 模組刪除資料夾或檔案
   */
@@ -97,3 +98,9 @@ My Default Task
 	gulp.src('assets/bootstrap/**/*.js', { base:"assets" })
 		.pipe(gulp.dest('output2'));
  });
+ 
+ /*===========================================================*/
+gulp.task('watch', function(){
+	 gulp.watch('app/**/*.js',['default']);
+});
+ 
