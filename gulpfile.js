@@ -62,3 +62,15 @@ My Default Task
 	gulp.src('assets/bootstrap/**/*.js', { base:"assets" })
 		.pipe(gulp.dest('output2'));
  });
+ 
+ /*
+ 可以用[]傳入多個
+  */
+ gulp.task('output3', function(){
+	gulp.src(['assets/vendor/**/*.js',
+			  'assets/vendor/**/*.css'], { base:
+			  'assets/vendor/' })
+		.pipe(gulp.dest('output3'));	 
+ });
+ 
+ 
