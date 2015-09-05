@@ -60,11 +60,11 @@ My Default Task
  		-bootstrp.min.js
  		-npm.js
  */
- gulp.task('output2', function(){
-	gulp.src('assets/bootstrap/**/*.js', { base:"assets" })
-		.pipe(gulp.dest('output2'));
- });
- 
+// gulp.task('output2', function(){
+//	gulp.src('assets/bootstrap/**/*.js', { base:"assets" })
+//		.pipe(gulp.dest('output2'));
+//});
+
  /*
  可以用[]傳入多個
   */
@@ -78,12 +78,22 @@ My Default Task
  /*
  使用 del 模組刪除資料夾或檔案
   */
- gulp.task('clean', function(){
+ gulp.task('clean', function(cb){
 	 
 	//這會把bootstrap資料夾也整個砍掉
 	//del(['output2/bootstrap/**']);
 	
 	//後面多加排除設定，可避免bootstrap資料夾被刪除
-	del(['output2/bootstrap/**', '!output2/bootstrap']);
+	//del(['output2/bootstrap/**', '!output2/bootstrap']);
 	
+	del(['output2/bootstrap/**/'])
+		.then(function (paths) {
+			console.log('Deleted files/folders:\n', paths.join('\n'));
+		})
+		.then(cb);
+ });
+ 
+ gulp.task('output2', ['clean'], function(){
+	gulp.src('assets/bootstrap/**/*.js', { base:"assets" })
+		.pipe(gulp.dest('output2'));
  });
