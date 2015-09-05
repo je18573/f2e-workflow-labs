@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var del = require('del');
+var concat = require('gulp-concat');
 
 gulp.task('default', ['mytask1'], function() {
 	console.log('My Default Task');
@@ -102,5 +103,16 @@ My Default Task
  /*===========================================================*/
 gulp.task('watch', function(){
 	 gulp.watch('app/**/*.js',['default']);
+});
+
+
+gulp.task('concat-app', function(){
+	gulp.src('app/**/*.module.js')
+		.pipe(concat('app.modules.js'))
+		.pipe(gulp.dest('assets'));
+	
+	gulp.src(['app/**/*.js','!app/**/*.module.js'])
+		.pipe(concat('app.bundles.js'))
+		.pipe(gulp.dest('assets'));
 });
  

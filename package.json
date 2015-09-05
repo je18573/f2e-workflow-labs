@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/je18573/f2e-workflow-labs#readme",
   "dependencies": {
+    "gulp-concat": "^2.6.0",
     "jquery": "^1.11.3",
     "lodash": "^3.10.1"
   },
