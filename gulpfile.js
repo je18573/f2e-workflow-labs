@@ -1,32 +1,33 @@
 var gulp = require('gulp');
-gulp.task('default', ['mytask1', 'mytask2'], function() {
+gulp.task('default', ['mytask1'], function() {
 	console.log('My Default Task');
 });
 
-//!!! 若傳入cb, 則一定要在function中加上cb()，否則此task不執行。
-gulp.task('mytask1', function(cb) {
+gulp.task('mytask1', ['mytask2'], function() {
 	console.log('Task1 Output');
-	//cb();
 });
 
-gulp.task('mytask2', function(cb) {
+gulp.task('mytask2', function() {
 	console.log('Task2 Output');
-	cb();
 });
+
 /*
-執行結果：
-[14:58:54] Using gulpfile ~\Code\f2e-workflow-labs\gulpfile.js
-[14:58:54] Starting 'mytask1'...
-Task1 Output
-[14:58:54] Starting 'mytask2'...
-Task2 Output
-[14:58:54] Finished 'mytask2' after 238 μs
- */
- 
- /*
- 解釋：
- 因是採非同步處理，因此mytask1, mytask2同時執行，
- 但mytask1因有傳cb但無執行cb()，會導致一直沒有完成，
- 再因相依關係，mytask1&mytask2要同時跑完才會執行default的log，
- 而mytask1無完成,所以不會跑出My Default task。
+ 因是非同步處理，因此必須用相依性做順序
+ 所以當執行default時發生有相依，會先去執行mytask1
+ 去執行mytask1時發生又有相依, 於是再先去執行mytask2
+ 如此執行上才會是：mytask2, mytask1, default
 */
+
+/*
+執行結果
+[15:08:09] Using gulpfile ~\Code\f2e-workflow-labs\gulpfile.js
+[15:08:09] Starting 'mytask2'...
+Task2 Output
+[15:08:09] Finished 'mytask2' after 305 μs
+[15:08:09] Starting 'mytask1'...
+Task1 Output
+[15:08:09] Finished 'mytask1' after 183 μs
+[15:08:09] Starting 'default'...
+My Default Task
+[15:08:09] Finished 'default' after 263 μs
+ */
