@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var del = require('del');
 
-var $ = require('gulp-load-plugins');
+var $ = require('gulp-load-plugins')();
 //var concat = require('gulp-concat');
 //var uglify = require('gulp-uglify');
 //var rename = require('gulp-rename');
@@ -113,32 +113,6 @@ gulp.task('watch', function(){
 
 
 gulp.task('concat-app', function(){
-	gulp.src(config.appPath+'/**/*.module.js')
-		.pipe($.concat('app.modules.js'))
-		.pipe(gulp.dest('assets'));
-	
-	gulp.src([config.appPath+'/**/*.js','!'+config.appPath+'/**/*.module.js'])
-		.pipe($.concat('app.bundles.js'))
-		.pipe(gulp.dest('assets'));
-});
-
-gulp.task('uglify-app', function(){
-	gulp.src(config.appPath+'/**/*.module.js')
-		.pipe(gulp.dest('src/app'))
-		.pipe($.concat('app.modules.js'))
-		.pipe($.uglify())
-		.pipe(gulp.dest('assets'));
-	
-	gulp.src([config.appPath+'/**/*.js','!'+config.appPath+'/**/*.module.js'])
-		.pipe($.gulp.dest('src/app'))
-		.pipe($.concat('app.bundles.js'))
-		.pipe($.uglify( {mangle: false} ))		
-		.pipe(gulp.dest('assets'));
-			
-});
-
-
-gulp.task('rename-app', function(){
 	gulp.src(config.appPath+'/**/*.module.js')
 		.pipe(gulp.dest('src/app'))
 		.pipe($.concat('app.modules.js'))
