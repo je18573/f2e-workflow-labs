@@ -8,9 +8,7 @@ module.exports = {
   module: {
     loaders: 
     [
-      {test: /\.css$/, loader:'style!css?minimize!autoprefixer'},    
-      //{test: /\.(jpg|png|gif)$/, loader:'url?limit=8000'}
-      {test: /\.(jpg|png|gif)$/, loader:'file?name=img/google-[hash:6].[ext]?[hash]'}
+      {test: /\.css$/, loader:'style!css'}
     ],
     
   }
